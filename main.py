@@ -5,7 +5,6 @@ from discord import Forbidden
 from discord.ext import commands, tasks
 from discord.ext.commands import has_permissions
 import openai
-from replit import db
 import json
 import os
 from asyncio import sleep
@@ -13,8 +12,8 @@ from colorama import Fore, Back, Style
 import random
 
 activity = discord.Game(name="/help")
-creators = ["829095380666941501", "983600476236943441"]
-sudoers = creators
+creators = ["YOUR_ID_HERE"]
+sudoers = creators #/sudo @user command
 
 def get_prefix(client, message):
   with open('prefixes.json', 'r') as f:
@@ -53,16 +52,6 @@ async def lie_detector(ctx, *, message):
   else:
     await ctx.reply("My code is broken :(")
   
-  
-@client.command()
-async def delete_user(ctx, user: discord.Member):
-  if str(ctx.author.id) in creators:
-    db[f"{user.id}_deleted?"] = True
-
-@client.command()
-async def revive_user(ctx, user: discord.Member):
-  if str(ctx.author.id) in creators:
-    db[f"{user.id}_deleted?"] = False
 
 @client.command()
 async def guilds(ctx):
@@ -268,6 +257,8 @@ async def history(ctx):
                                     description=f"**{embed_description}**")
       await ctx.author.send("", embed=history_embed)
 
+
+
 @client.event
 async def on_command_error(ctx, error):
   if isinstance(error, commands.CommandNotFound):
@@ -298,10 +289,9 @@ async def help(ctx):
     prefix - set prefix
     nick - set nick
     prev_prompt - shows previous prompt across all servers by every user
-    scriptguild - ScriptGuild Info
     help - shows this message
 """, colour=discord.Colour.blue())
-  help_embed.set_footer(text='Original Bot Made by ScriptGuild Team\nOriginal Bot Developed by\n\nKentcaps#5290\nRGB CAT#0001')
+  help_embed.set_footer(text=' Bot Made by ScriptGuild Team\nBot Developed by\n\nKentcaps#5290\nRGB CAT#0001')
   await ctx.send(embed=help_embed)
 
-client.run("TOKEN")
+client.run(os.getenv("TOKEN"))
