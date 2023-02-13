@@ -291,7 +291,7 @@ async def help(ctx):
     prev_prompt - shows previous prompt across all servers by every user
     help - shows this message
 """, colour=discord.Colour.blue())
-  help_embed.set_footer(text=' Bot Made by ScriptGuild Team\nBot Developed by\n\nKentcaps#5290\nRGB CAT#0001')
+  help_embed.set_footer(text='Original bot Made by ScriptGuild Team\nOriginal bot Developed by\n\nKentcaps#5290\nRGB CAT#0001')
   await ctx.send(embed=help_embed)
 
 client.run(os.getenv("TOKEN"))
