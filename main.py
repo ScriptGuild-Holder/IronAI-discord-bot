@@ -11,26 +11,17 @@ import os
 from asyncio import sleep
 from colorama import Fore, Back, Style
 import random
-from web import keep_alive # if your using a 24/7 server, you can remove this
 
-#vars
 activity = discord.Game(name="/help")
 creators = ["829095380666941501", "983600476236943441"]
 sudoers = creators
 
-
-
-
-
-#server prefixes
 def get_prefix(client, message):
   with open('prefixes.json', 'r') as f:
     prefixes = json.load(f)
 
   return prefixes[str(message.guild.id)]
 
-
-#client var
 client = commands.Bot(command_prefix=get_prefix,
                       intents=discord.Intents.all(),
                       case_insensitive=True,
@@ -277,11 +268,6 @@ async def history(ctx):
                                     description=f"**{embed_description}**")
       await ctx.author.send("", embed=history_embed)
 
-
-#@client.command()
-#async def send_mail(ctx,user:discord.User,*,message):
-
-
 @client.event
 async def on_command_error(ctx, error):
   if isinstance(error, commands.CommandNotFound):
@@ -318,5 +304,4 @@ async def help(ctx):
   help_embed.set_footer(text='Original Bot Made by ScriptGuild Team\nOriginal Bot Developed by\n\nKentcaps#5290\nRGB CAT#0001')
   await ctx.send(embed=help_embed)
 
-keep_alive() # if your using a 24/7 server, you can remove this
 client.run("TOKEN")
